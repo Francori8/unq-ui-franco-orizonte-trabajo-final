@@ -1,14 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import { GameContextProvider } from './context/GameContext'
+
+import { GameContainer } from './app/GameContainer'
 
 function App() {
  
 
   return (
     <>
-      
+      <GameContextProvider>
+        <GameContainer />
+      </GameContextProvider>
     </>
   )
 }
