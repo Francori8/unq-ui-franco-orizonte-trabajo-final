@@ -6,6 +6,6 @@ export const getDificulty = async () => {
         const response = await axios.get(`${BASE_URL}/difficulty`);    
         return response.data;    
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 }   
