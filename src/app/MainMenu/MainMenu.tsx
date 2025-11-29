@@ -1,34 +1,90 @@
 import { useEffect } from "react";
 import { useGameContext } from "../../context/GameContext";
 import { getDificulty } from "../../service/getDificulty";
-import { useGetData } from "../../service/useGetData";
+import { useGetData } from "../../hooks/useGetData";
 import { StateGames } from "../../types/stateGames";
 
 export const MainMenu = () => {
-    const { setState, setDificulty } = useGameContext();
-    
-    const { getData, data, loading, error } = useGetData<string[]>(getDificulty);
+  const {
+    setState,
+    setDificulty,
+    setLanguage,
+    language,
+    availableTranslator,
+    translatedText,
+  } = useGameContext();
 
-    useEffect(() => {
-        getData();
-    }, []);
+  const { getData, data, loading, error } = useGetData<string[]>(getDificulty);
 
-    const handlePlay = (dificulty: string) => {
-        setDificulty(dificulty);
-        setState(StateGames.PLAYING);
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const handlePlay = (dificulty: string) => {
+    setDificulty(dificulty);
+    setState(StateGames.PLAYING);
+  };
+
+  const getColorDificulty = (dificulty: string) => {
+    switch (dificulty) {
+      case "easy":
+        return "bg-green-800";
+      case "normal":
+        return "bg-yellow-800";
+      case "hard":
+        return "bg-red-800";
+      case "extreme":
+        return "bg-purple-800";
+      default:
+        return "bg-amber-800";
     }
+  };
 
-    if(loading) return <p>Loading...</p>
-    if(error) return <p>Error: {error}</p>
-    
-    return (
-        <section className="flex flex-col justify-center items-center">
-            <h1 className="mb-10 text-2xl">Questions</h1>
-            {data?.map((item: string) => (
-                <div className="flex justify-center  items-center py-2 px-4 " key={item}>
-                <button className="bg-amber-800 w-3xs cursor-pointer hover:bg-amber-900 text-white font-bold py-2 px-4 rounded" onClick={() => handlePlay(item)}><span className="text-2xl capitalize">{item}</span></button>
-            </div>               
-            ))}
-        </section>
-    );
-}
+  const handleLanguage = (language: "en" | "es") => {
+    setLanguage(language);
+  };
+
+  const isSpanish = language === "es";
+  const isEnglish = language === "en";
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  return (
+    <section className="flex flex-col justify-center items-center">
+      {availableTranslator && (
+        <nav className="flex justify-center items-center gap-2 mb-10">
+          <button
+            onClick={() => handleLanguage("en")}
+            className="bg-amber-800  cursor-pointer hover:bg-amber-900 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isEnglish}
+          >
+            {translatedText.english}
+          </button>
+          <button
+            onClick={() => handleLanguage("es")}
+            className="bg-amber-800  cursor-pointer hover:bg-amber-900 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isSpanish}
+          >
+            {translatedText.spanish}
+          </button>
+        </nav>
+      )}
+      <h1 className="mb-10 text-2xl">{translatedText.title}</h1>
+      {data?.map((item: string) => (
+        <div
+          className="flex justify-center  items-center py-2 px-4 "
+          key={item}
+        >
+          <button
+            className={`${getColorDificulty(
+              item
+            )} w-3xs cursor-pointer hover:scale-105 transition-all duration-300 text-white font-bold py-2 px-4 rounded`}
+            onClick={() => handlePlay(item)}
+          >
+            <span className="text-xl capitalize">{translatedText[item]}</span>
+          </button>
+        </div>
+      ))}
+    </section>
+  );
+};
