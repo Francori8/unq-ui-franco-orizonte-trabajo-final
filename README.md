@@ -1,73 +1,50 @@
-# React + TypeScript + Vite
+# Preguntas y respuestas - Trabajo Final UNQ UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación de preguntas y respuestas desarrollada con React, TypeScript y Vite para la materia de Construcción de Interfaces de Usuario.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+La aplicación permite jugar a un juego de preguntas y respuestas con las siguientes características:
 
-## React Compiler
+- **Selección de dificultad**: Se puede elegir entre cuatro niveles de dificultad (fácil, normal, difícil y extremo).
+- **Preguntas de opción múltiple**: Cada pregunta presenta cuatro opciones de respuesta.
+- **Sistema de puntuación**: Se lleva un registro del puntaje obtenido durante la partida.
+- **Feedback visual**: Indicadores de respuestas correctas e incorrectas con colores distintivos.
+- **Traducción automática**: Soporte para inglés y español utilizando la Translation API del navegador (si está disponible).
+- **Reinicio de partida**: Opción para reiniciar el juego en cualquier momento.
+- **Pantalla de resultados**: Al finalizar, se muestra el puntaje total y el porcentaje de aciertos.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Instalación y uso
 
-## Expanding the ESLint configuration
+1. Clonar el repositorio:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/Francori8/unq-ui-franco-orizonte-trabajo-final.git
+cd unq-ui-franco-orizonte-trabajo-final
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Instalar las dependencias:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+3. Ejecutar el proyecto en modo desarrollo:
+
+```bash
+npm run dev
+```
+
+La aplicación estará disponible en `http://localhost:5173` (o el puerto que indique Vite).
+
+## Tecnologías utilizadas
+
+- React 18
+- TypeScript
+- Vite
+- TailwindCSS
+- Translation API (experimental)
+
+## Notas
+
+La funcionalidad de traducción automática requiere que el navegador soporte la Translation API. Si no está disponible, la aplicación funcionará únicamente en inglés.
