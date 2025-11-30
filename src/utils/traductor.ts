@@ -16,6 +16,8 @@ const textWithIdiom = {
     normal: "Normal",
     hard: "Hard",
     extreme: "Extreme",
+    paragraph: "The translations to Spanish may not be very accurate",
+    paragraph2: "The Google Translate API is used",
   },
   es: {
     title: "Preguntas",
@@ -34,6 +36,8 @@ const textWithIdiom = {
     normal: "Normal",
     hard: "Dificil",
     extreme: "Extremo",
+    paragraph: "Las traducciones al español pueden no ser tan precisas",
+    paragraph2: "Se utiliza la Api Transalate de Google",
   },
 };
 
